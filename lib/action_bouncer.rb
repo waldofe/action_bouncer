@@ -1,17 +1,17 @@
 module ActionBouncer
-	class Unauthorized < StandardError; end
+  class Unauthorized < StandardError; end
 
-	def self.included(klass)
-		klass.class_eval do
-			def self.allow(resource, options)
+  def self.included(klass)
+    klass.class_eval do
+      def self.allow(resource, options)
         @resource = resource
-				@options = options
-			end
+        @options = options
+      end
 
-			def self.allowed_actions
+      def self.allowed_actions
         allowed_actions = @options[:to]
         allowed_actions.is_a?(Array) ? allowed_actions : [allowed_actions]
-			end
+      end
 
       def self.conditions
         conditions = @options[:if]
@@ -22,18 +22,18 @@ module ActionBouncer
         @resource
       end
 
-			private_class_method :allow, :allowed_actions, :resource
+      private_class_method :allow, :allowed_actions, :resource
 
-			private
+      private
 
-			before_action :authorize_resource
+      before_action :authorize_resource
 
-			def authorize_resource
+      def authorize_resource
         fail Unauthorized if resource.present? && !authorized?
-			end
+      end
 
       def resource
-				send(self.class.send(:resource))
+        send(self.class.send(:resource))
       end
 
       def conditions
@@ -44,10 +44,10 @@ module ActionBouncer
         self.class.send(:allowed_actions)
       end
 
-			def authorized?
+      def authorized?
         allowed_actions.include?(params[:action].to_sym) &&
           conditions.any? { |condition| resource.send(condition).present? }
       end
-		end
-	end
+    end
+  end
 end
