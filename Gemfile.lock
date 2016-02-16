@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     action_bouncer (0.0.1)
-      rails (~> 4.2.5.1)
+      rails (~> 4)
 
 GEM
   remote: https://rubygems.org/
@@ -123,5 +123,5 @@ PLATFORMS
 
 DEPENDENCIES
   action_bouncer!
-  rspec-rails (~> 3.4.2)
+  rspec-rails
   sqlite3
