@@ -3,10 +3,6 @@ require 'spec_helper'
 class AllParamController < ActionController::Base
   helper_method :current_user
 
-  def current_user
-    OpenStruct.new(admin?: true)
-  end
-
   include ActionBouncer
 
   allow :current_user, to: :all, if: :admin?
@@ -33,8 +29,24 @@ describe AllParamController do
     end
   end
 
-  it { expect{ get :edit }.not_to raise_error }
-  it { expect{ get :index }.not_to raise_error }
-  it { expect{ get :new }.not_to raise_error }
+  context 'when authorized' do
+    before do
+      allow(subject).to receive(:current_user) { OpenStruct.new(admin?: true) }
+    end
+
+    it { expect{ get :edit }.not_to raise_error }
+    it { expect{ get :index }.not_to raise_error }
+    it { expect{ get :new }.not_to raise_error }
+  end
+
+  context 'when not authorized' do
+    before do
+      allow(subject).to receive(:current_user) { OpenStruct.new(admin?: false) }
+    end
+
+    it { expect{ get :edit }.to raise_error{ ActionBouncer::Unauthorized } }
+    it { expect{ get :index }.to raise_error{ ActionBouncer::Unauthorized } }
+    it { expect{ get :new }.to raise_error{ ActionBouncer::Unauthorized } }
+  end
 end
 
