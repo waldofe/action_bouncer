@@ -1,28 +1,17 @@
+require 'action_bouncer/authorization'
+
 module ActionBouncer
   class Unauthorized < StandardError; end
 
   def self.included(klass)
     klass.class_eval do
       def self.allow(resource, options)
-        @resource = resource
-        @options = options
+        @_authorization = Authorization.new(resource, options)
       end
 
-      def self.allowed_actions
-        allowed_actions = @options[:to]
-        allowed_actions.is_a?(Array) ? allowed_actions : [allowed_actions]
+      def self._authorization
+        @_authorization
       end
-
-      def self.conditions
-        conditions = @options[:if]
-        conditions.is_a?(Array) ? conditions : [conditions]
-      end
-
-      def self.resource
-        @resource
-      end
-
-      private_class_method :allow, :allowed_actions, :resource
 
       private
 
@@ -32,21 +21,29 @@ module ActionBouncer
         fail Unauthorized if resource.present? && !authorized?
       end
 
+      def authorized?
+        authorized_action? && matches_resource_condition?
+      end
+
+      def authorized_action?
+        allowed_actions.include?(params[:action].to_sym) ||
+          allowed_actions.include?(:all)
+      end
+
+      def matches_resource_condition?
+        conditions.any? { |condition| resource.send(condition).present? }
+      end
+
       def resource
-        send(self.class.send(:resource))
+        send(self.class._authorization.send(:resource))
       end
 
       def conditions
-        self.class.send(:conditions)
+        self.class._authorization.conditions
       end
 
       def allowed_actions
-        self.class.send(:allowed_actions)
-      end
-
-      def authorized?
-        allowed_actions.include?(params[:action].to_sym) &&
-          conditions.any? { |condition| resource.send(condition).present? }
+        self.class._authorization.allowed_actions
       end
     end
   end
