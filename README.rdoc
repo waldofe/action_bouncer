@@ -1,3 +1,0 @@
-= ActionBouncer
-
-It's a dead simple rails authorization lib.
