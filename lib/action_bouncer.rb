@@ -1,8 +1,6 @@
 require 'action_bouncer/authorization'
 
 module ActionBouncer
-  class Unauthorized < StandardError; end
-
   def self.included(klass)
     klass.class_eval do
       def self.allow(resource, options)

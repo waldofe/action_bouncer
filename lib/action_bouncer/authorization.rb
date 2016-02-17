@@ -1,4 +1,6 @@
 module ActionBouncer
+  class Unauthorized < StandardError; end
+
   class Authorization
     attr_reader :resource_sym
 
