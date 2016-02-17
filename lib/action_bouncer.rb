@@ -13,7 +13,7 @@ module ActionBouncer
         @_authorization
       end
 
-      before_action { self.class._authorization.authorize!(self) }
+      before_action { self.class._authorization.try(:authorize!, self) }
     end
   end
 end
