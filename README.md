@@ -6,7 +6,7 @@ It's a dead simple Rails authorization lib for well defined authorization object
 
 Allowing user to access specific actions:
 
-```
+```ruby
 class UsersController < ApplicationController
   allow :current_user, to: [:index, :new], if: :admin?
 
@@ -23,7 +23,7 @@ end
 
 Allowing user to access all actions:
 
-```
+```ruby
 class UsersController < ApplicationController
   allow :current_user, to: :all, if: :admin?
 
@@ -40,13 +40,13 @@ end
 
 Also, you can pass multiple methods that your authorizable object responds to:
 
-```
+```ruby
 allow :current_user, to: [:index, :new], if: [:admin?, :leader?]
 ```
 
 When not authorized, `ActionBouncer` raises an exception that can be rescued on your `ApplicationController`:
 
-```
+```ruby
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
