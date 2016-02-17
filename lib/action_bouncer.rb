@@ -13,38 +13,7 @@ module ActionBouncer
         @_authorization
       end
 
-      private
-
-      before_action :authorize_resource
-
-      def authorize_resource
-        fail Unauthorized if resource.present? && !authorized?
-      end
-
-      def authorized?
-        authorized_action? && matches_resource_condition?
-      end
-
-      def authorized_action?
-        allowed_actions.include?(params[:action].to_sym) ||
-          allowed_actions.include?(:all)
-      end
-
-      def matches_resource_condition?
-        conditions.any? { |condition| resource.send(condition).present? }
-      end
-
-      def resource
-        send(self.class._authorization.send(:resource))
-      end
-
-      def conditions
-        self.class._authorization.conditions
-      end
-
-      def allowed_actions
-        self.class._authorization.allowed_actions
-      end
+      before_action { self.class._authorization.authorize!(self) }
     end
   end
 end
