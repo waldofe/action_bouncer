@@ -123,5 +123,5 @@ PLATFORMS
 
 DEPENDENCIES
   action_bouncer!
-  rspec-rails
-  sqlite3
+  rspec-rails (~> 3)
+  sqlite3 (~> 1)
