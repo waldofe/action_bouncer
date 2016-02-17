@@ -4,6 +4,7 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path("../../spec/dummy/config/environment.rb",  __FILE__)
 require "action_controller"
 require "rspec/rails"
+require 'ostruct'
 
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
