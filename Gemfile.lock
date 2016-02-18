@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    action_bouncer (0.0.1)
+    action_bouncer (0.0.2)
       rails (~> 4)
 
 GEM
