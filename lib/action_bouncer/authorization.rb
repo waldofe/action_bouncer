@@ -30,13 +30,11 @@ module ActionBouncer
     end
 
     def allowed_actions
-      allowed_actions = @options[:to]
-      allowed_actions.is_a?(Array) ? allowed_actions : [allowed_actions]
+      Array.wrap(@options[:to])
     end
 
     def conditions
-      conditions = @options[:if]
-      conditions.is_a?(Array) ? conditions : [conditions]
+      Array.wrap(@options[:if])
     end
   end
 end
