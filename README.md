@@ -2,6 +2,16 @@
 
 It's a dead simple Rails authorization lib for well defined authorization objects interfaces.
 
+## Installing
+
+Add it to your gemfile:
+
+`gem 'action_bouncer'`
+
+Or manually install it:
+
+`gem install action_bouncer`
+
 ## Examples
 
 Allowing user to access specific actions:
