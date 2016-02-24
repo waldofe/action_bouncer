@@ -21,6 +21,6 @@ test:
 
 database:
   override:
-    -
+    - rake
 
 
