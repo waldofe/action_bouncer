@@ -7,18 +7,6 @@ dependencies:
     - bundle install:
         timeout: 180
 
-  # we automatically cache and restore many dependencies between
-  # builds. If you need to, you can add custom paths to cache:
-  cache_directories:
-    - "custom_1"   # relative to the build directory
-    - "~/custom_2" # relative to the user's home directory
-
-## Customize test commands
-test:
-  override:
-    - bundle exec rspec spec
-
-
 database:
   override:
     - rake
