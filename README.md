@@ -1,5 +1,7 @@
 # ActionBouncer
 
+[![Circle CI](https://circleci.com/gh/oswaldoferreira/action_bouncer/tree/master.svg?style=svg)](https://circleci.com/gh/oswaldoferreira/action_bouncer/tree/master)
+
 It's a dead simple Rails authorization lib for well defined authorization objects interfaces.
 
 ## Installing
