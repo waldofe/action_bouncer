@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
   def new
   end
-  
+
   def edit
   end
 end
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
   def new
   end
-  
+
   def edit
   end
 end
@@ -54,6 +54,13 @@ Also, you can pass multiple methods that your authorizable object responds to:
 
 ```ruby
 allow :current_user, to: [:index, :new], if: [:admin?, :leader?]
+```
+
+And allow users with different authorizations to access different actions:
+
+```ruby
+allow :current_user, to: :index, if: :leader?
+allow :current_user, to: :all, if: :admin?
 ```
 
 When not authorized, `ActionBouncer` raises an exception that can be rescued on your `ApplicationController`:
