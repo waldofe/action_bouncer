@@ -1,17 +1,17 @@
-require 'action_bouncer/authorization'
+require 'action_bouncer/allowance'
 
 module ActionBouncer
   def self.included(klass)
     klass.class_eval do
       def self.allow(resource, options)
-        @_authorization = Authorization.new(resource, options)
+        @_allowance = Allowance.new(resource, options)
       end
 
-      def self._authorization
-        @_authorization
+      def self._allowance
+        @_allowance
       end
 
-      before_action { self.class._authorization.try(:authorize!, self) }
+      before_action { self.class._allowance.try(:authorize!, self) }
     end
   end
 end

@@ -1,7 +1,7 @@
 module ActionBouncer
-  class Unauthorized < StandardError; end
+	class Unauthorized < StandardError; end
 
-  class Authorization
+  class Allowance
     attr_reader :resource_sym
 
     def initialize(resource_sym, options)
@@ -12,16 +12,16 @@ module ActionBouncer
       action = controller.send(:params).fetch(:action)
       resource = controller.send(@resource_sym)
 
-      fail Unauthorized if unauthorized?(action, resource)
+      fail Unauthorized if not_allowed?(action, resource)
     end
 
     private
 
-    def unauthorized?(action, resource)
-      !authorized_action?(action) || !matches_resource_condition?(resource)
+    def not_allowed?(action, resource)
+      !allowed_action?(action) || !matches_resource_condition?(resource)
     end
 
-    def authorized_action?(action)
+    def allowed_action?(action)
       allowed_actions.include?(action.to_sym) || allowed_actions.include?(:all)
     end
 
