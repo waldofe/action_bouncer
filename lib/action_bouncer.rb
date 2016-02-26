@@ -5,7 +5,7 @@ module ActionBouncer
   def self.included(klass)
     klass.class_eval do
       def self.allow(resource, options)
-				@_allowances ||= []
+        @_allowances ||= []
         @_allowances << Allowance.new(resource, options)
       end
 
