@@ -3,3 +3,6 @@ language: ruby
 addons:
   code_climate:
     repo_token: ENV['CODECLIMATE_TOKEN']
+
+script:
+  - bundle exec rspec spec
