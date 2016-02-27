@@ -1,6 +1,9 @@
 # Configure Rails Environment
 ENV["RAILS_ENV"] = "test"
 
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 require File.expand_path("../../spec/dummy/config/environment.rb",  __FILE__)
 require "action_controller"
 require "rspec/rails"
