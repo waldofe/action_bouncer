@@ -1,3 +1,5 @@
+language: ruby
+
 addons:
-	code_climate:
-		repo_token: ENV['CODECLIMATE_TOKEN']
+  code_climate:
+    repo_token: ENV['CODECLIMATE_TOKEN']
