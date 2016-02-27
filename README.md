@@ -1,6 +1,7 @@
 # ActionBouncer
 
 [![Build Status](https://travis-ci.org/oswaldoferreira/action_bouncer.svg?branch=master)](https://travis-ci.org/oswaldoferreira/action_bouncer)
+[![Test Coverage](https://codeclimate.com/github/oswaldoferreira/action_bouncer/badges/coverage.svg)](https://codeclimate.com/github/oswaldoferreira/action_bouncer/coverage)
 
 It's a dead simple Rails authorization lib for well defined authorization objects interfaces.
 
