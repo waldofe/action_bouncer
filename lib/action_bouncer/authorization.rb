@@ -8,14 +8,14 @@ module ActionBouncer
 
     def authorize!(controller)
       return if @allowances.nil?
-      fail Unauthorized if unauthorized?(controller)
+      fail Unauthorized unless authorized?(controller)
     end
 
     private
 
-    def unauthorized?(controller)
+    def authorized?(controller)
       action = controller.send(:params).fetch(:action)
-      @allowances.all? { |allowance| allowance.not_allowed?(controller, action) }
+      @allowances.any? { |allowance| allowance.allowed?(controller, action) }
     end
   end
 end

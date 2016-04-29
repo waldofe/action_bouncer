@@ -6,9 +6,10 @@ module ActionBouncer
       @resource_sym, @options = resource_sym, options
     end
 
-    def not_allowed?(controller, action)
+    def allowed?(controller, action)
       resource = controller.send(@resource_sym)
-      !allowed_action?(action) || !matches_resource_condition?(resource)
+      allowed_action?(action) &&
+       matches_resource_condition?(resource)
     end
 
     private
