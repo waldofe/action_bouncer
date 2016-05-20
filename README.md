@@ -17,7 +17,9 @@ Or manually install it:
 
 ## Examples
 
-Allowing user to access specific actions, except one:
+Allowing user to access specific actions:
+
+`except` key works as a bypassing. Any kind of user would be allowed to access this action.
 
 ```ruby
 class UsersController < ApplicationController
