@@ -17,11 +17,11 @@ Or manually install it:
 
 ## Examples
 
-Allowing user to access specific actions:
+Allowing user to access specific actions, except one:
 
 ```ruby
 class UsersController < ApplicationController
-  allow :current_user, to: [:index, :new], if: :admin?
+  allow :current_user, to: [:index, :new], except: :edit, if: :admin?
 
   def index
   end
