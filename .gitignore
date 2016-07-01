@@ -10,3 +10,4 @@ spec/dummy/.sass-cache
 coverage/*
 pkg
 *.lock
+.ruby-version
