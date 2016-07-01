@@ -1,8 +1,2 @@
-source 'https://rubygems.org'
-
+source :rubygems
 gemspec
-
-group :test do
-  gem 'codeclimate-test-reporter', require: false
-end
-
